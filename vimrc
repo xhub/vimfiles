@@ -1,6 +1,6 @@
 
 call pathogen#infect()
-
+call pathogen#helptags()
 " Show us the command we're typing
 set showcmd
 
@@ -11,13 +11,13 @@ set showmatch
 set autoindent
 "set smartindent
 filetype on
+syntax on
 filetype plugin on
 filetype indent on
 set nonu
 "set paste
 set ts=3
 set shiftwidth=3
-syntax on
 " 
 set clipboard=unnamed
 
@@ -52,7 +52,7 @@ map <F10> :call Folding() <CR>
 
 "map <F9> :set nopaste
 
-map <F8> :set expandtab
+nmap <F8> :TagbarToggle<CR>
 
 set sb
 map <F11> :split /tmp/ocaml \| %d \|setlocal ft=omlet \| setlocal autowrite \| r!ocaml < # <CR>
@@ -380,9 +380,18 @@ autocmd BufReadPost * :DetectIndent
 let g:detectindent_preferred_expandtab = 0
 let g:detectindent_preferred_indent = 2
 
+augroup filetypedetect
+  au! BufNewFile,BufRead *.jemdoc setf jemdoc
+augroup END
+
+" Last line is for proper wrapping of jemdoc lists, etc.
+autocmd Filetype jemdoc setlocal comments=:#,fb:-,fb:.,fb:--,fb:..,fb:\:
+
 let g:pymode_lint_ignore = "E501,E225,E226,W404,W0511,W0614,R0914,W0621,C0301"
 let g:pymode_lint_checker = "pylint,pyflakes,pep8,mccabe"
 
 let g:gitgutter_escape_grep = 1
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
+
+autocmd FileType ebuild setlocal noexpandtab
