@@ -387,11 +387,19 @@ augroup END
 " Last line is for proper wrapping of jemdoc lists, etc.
 autocmd Filetype jemdoc setlocal comments=:#,fb:-,fb:.,fb:--,fb:..,fb:\:
 
+" Disable pylint checking every save
+let g:pymode_lint_write = 0
+" Set key 'R' for run python code
+let g:pymode_run_key = 'R'
 let g:pymode_lint_ignore = "E501,E225,E226,W404,W0511,W0614,R0914,W0621,C0301"
 let g:pymode_lint_checker = "pylint,pyflakes,pep8,mccabe"
+let g:pymode_rope = 0
 
 let g:gitgutter_escape_grep = 1
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 autocmd FileType ebuild setlocal noexpandtab
+set scrolloff=999
+
+let g:airline#extensions#tabline#excludes = ["Quickfix", "CodeCheck"]
